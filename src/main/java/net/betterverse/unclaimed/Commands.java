@@ -28,12 +28,12 @@ public class Commands {
             public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
                 if (sender instanceof Player) {
                     if (args.length == 0) {
-                        sender.sendMessage(Main.PREFIX + protectionStatus(((Player)sender).getLocation()));
+                        sender.sendMessage(protectionStatus(((Player)sender).getLocation()));
                     } else {
                         if (args[0].equalsIgnoreCase("reload")) {
                             if (sender.hasPermission("unclaimed.reload")) instance.config.reload(instance);
                             else sender.sendMessage(Main.PREFIX + "You do not have permission to do this.");
-                        } else if (args[0].equalsIgnoreCase("teleport")) {
+                        } else if (args[0].equalsIgnoreCase("teleport") || args[0].equalsIgnoreCase("tp")) {
                             if (sender.hasPermission("unclaimed.teleport")) TeleToUnclaimed((Player)sender);
                             else sender.sendMessage(Main.PREFIX + "You do not have permission to do this");
                         } else return false;
