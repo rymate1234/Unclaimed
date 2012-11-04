@@ -1,0 +1,16 @@
+name: Unclaimed
+main: net.betterverse.unclaimed.Main
+version: 1.0
+author: ChrizC
+softdepend: [MyChunks, WorldGuard, Communities]
+commands:
+  unclaimed:
+    description: Interact with the plugin.
+    usage: /unclaimed [teleport]
+permissions:
+  unclaimed.teleport:
+    default: true
+    description: Allows the player to teleport to an unclaimed plot of land.
+  unclaimed.reload:
+    default: op
+    description: Allows the player to reload.
