@@ -62,7 +62,7 @@ public class Commands {
         response += " MyChunks: ";
         
         //MyChunks checks
-        if (isMyChunkd(l.getWorld().getName(), l.getBlockX(), l.getBlockZ())) response += "" + ChatColor.BOLD + ChatColor.RED + "PROTECTED." + ChatColor.RESET;
+        if (isMyChunkd(l.getWorld().getName(), c)) response += "" + ChatColor.BOLD + ChatColor.RED + "PROTECTED." + ChatColor.RESET;
         else response += "" + ChatColor.GREEN + "Unprotected." + ChatColor.RESET;
         
         response += " Communities: ";
@@ -79,9 +79,9 @@ public class Commands {
         return wgm.hasRegion(c);
     }
     
-    private boolean isMyChunkd(String w, int x, int z) {
+    private boolean isMyChunkd(String w, Chunk c) {
         MyChunks mc = (MyChunks)instance.getServer().getPluginManager().getPlugin("MyChunks");
-        OwnedChunk oc = mc.getChunkManager().getOwnedChunk(w, x, z);
+        OwnedChunk oc = mc.getChunkManager().getOwnedChunk(w, c.getX(), c.getZ());
         
         return (oc != null);
     }
@@ -94,7 +94,7 @@ public class Commands {
     private boolean isProtected(Location l) {
         Chunk c = l.getChunk();
         
-        return ((isWorldGuarded(c)) || (isMyChunkd(l.getWorld().getName(), l.getBlockX(), l.getBlockZ())) || (isCommunitied(l)));
+        return ((isWorldGuarded(c)) || (isMyChunkd(l.getWorld().getName(), c)) || (isCommunitied(l)));
     }
     
     private void TeleToUnclaimed(Player p) {
