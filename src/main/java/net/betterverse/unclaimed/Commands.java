@@ -91,7 +91,7 @@ public class Commands {
         return (com.isChunkOwned(WorldCoord.parseWorldCoord(l)));
     }
     
-    private boolean isProtected(Location l) {
+    public boolean isProtected(Location l) {
         Chunk c = l.getChunk();
         
         return ((isWorldGuarded(c)) || (isMyChunkd(l.getWorld().getName(), c)) || (isCommunitied(l)));
