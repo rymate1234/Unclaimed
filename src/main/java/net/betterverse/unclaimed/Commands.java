@@ -74,19 +74,19 @@ public class Commands {
         return response;
     }
     
-    private boolean isWorldGuarded(Chunk c) {
+    public boolean isWorldGuarded(Chunk c) {
         WorldguardManager wgm = new WorldguardManager(instance);
         return wgm.hasRegion(c);
     }
     
-    private boolean isMyChunkd(String w, Chunk c) {
+    public boolean isMyChunkd(String w, Chunk c) {
         MyChunks mc = (MyChunks)instance.getServer().getPluginManager().getPlugin("MyChunks");
         OwnedChunk oc = mc.getChunkManager().getOwnedChunk(w, c.getX(), c.getZ());
         
         return (oc != null);
     }
     
-    private boolean isCommunitied(Location l) {
+    public boolean isCommunitied(Location l) {
         Communities com = (Communities)instance.getServer().getPluginManager().getPlugin("Communities");
         return (com.isChunkOwned(WorldCoord.parseWorldCoord(l)));
     }
