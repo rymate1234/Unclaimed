@@ -13,6 +13,7 @@ public class Main extends JavaPlugin {
     
     //private Econ economy;
     public Config config;
+    public Commands cmds;
 
     @Override
     public void onDisable() {
@@ -25,7 +26,7 @@ public class Main extends JavaPlugin {
         PREFIX = "[" + pdf.getName() + "] ";
         
         config = new Config(this);
-        Commands cmds = new Commands(this);
+        cmds = new Commands(this);
         
         log.info(PREFIX + "version v" + pdf.getVersion() + " is enabled.");
     }
