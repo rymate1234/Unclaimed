@@ -86,7 +86,7 @@ public class UnclaimedCommmand implements CommandExecutor {
         return getProtection(chunk.getBlock(0, 0, 0).getLocation());
     }
 
-    private void teleport(Player p) {
+    private void teleport(Player player) {
         Random random = new Random();
         int x;
         int z;
@@ -96,15 +96,20 @@ public class UnclaimedCommmand implements CommandExecutor {
             i++;
             x = random.nextInt(instance.getConfiguration().getMaxX() * 2) - instance.getConfiguration().getMaxX();
             z = random.nextInt(instance.getConfiguration().getMaxZ() * 2) - instance.getConfiguration().getMaxZ();
-            chunk = p.getWorld().getChunkAt(x, z);
+            chunk = player.getWorld().getChunkAt(x, z);
         } while (getProtection(chunk) != null && i < 100);
         if (i == 100) {
-            p.sendMessage("Gave up looking for unclaimed chunk after 100 tries.");
+            player.sendMessage("Gave up looking for unclaimed chunk after 100 tries.");
         } else {
             Location chunkCenter = chunk.getBlock(7,127,7).getLocation();
             Location teleportLocation = chunk.getWorld().getHighestBlockAt(chunkCenter).getLocation().add(0, 1, 0);
-            p.teleport(teleportLocation);
-            p.sendMessage("You've been teleported to an unclaimed area.");
+            if (UnclaimedCommandTeleportTask.isCooling(player)) {
+                player.sendMessage("You've teleported too recently!");
+            } else {
+                Bukkit.getScheduler().runTaskLater(instance, new UnclaimedCommandTeleportTask(player), instance.getConfiguration().getTeleportCooldown() * 20);
+                player.teleport(teleportLocation);
+                player.sendMessage("You've been teleported to an unclaimed area.");
+            }
         }
     }
 }

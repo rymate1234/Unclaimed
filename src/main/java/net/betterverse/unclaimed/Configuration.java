@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Configuration {
     
+    private int teleportCooldown;
     private int maxX;
     private int maxZ;
     private List<String> plugins;
@@ -17,9 +18,10 @@ public class Configuration {
 
     static {
         defaults = new YamlConfiguration();
+        defaults.set("teleport-cooldown", 60);
         defaults.set("max-search-x", 5000);
         defaults.set("max-search-z", 5000);
-        defaults.set("plugins", new String[]{"Communities", "MyChunks", "WorldGuard"});
+        defaults.set("plugins", new String[]{"WorldGuard"});
     }
 
     public Configuration(Unclaimed instance) {
@@ -30,9 +32,14 @@ public class Configuration {
     public void reload() {
         config = (YamlConfiguration) instance.getConfig();
         config.setDefaults(defaults);
+        teleportCooldown = config.getInt("teleport-cooldown");
         maxX = config.getInt("max-search-x");
         maxZ = config.getInt("max-search-z");
         plugins = config.getStringList("plugins");
+    }
+
+    public int getTeleportCooldown() {
+        return teleportCooldown;
     }
 
     public int getMaxX() {
