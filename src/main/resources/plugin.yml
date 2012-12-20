@@ -1,7 +1,7 @@
 name: Unclaimed
-main: net.betterverse.unclaimed.Main
+main: net.betterverse.unclaimed.Unclaimedaimed
 version: 1.0
-author: ChrizC
+authors: [ChrizC, petteyg359]
 softdepend: [MyChunks, WorldGuard, Communities]
 commands:
   unclaimed:
