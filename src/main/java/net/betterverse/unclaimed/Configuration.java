@@ -2,18 +2,15 @@ package net.betterverse.unclaimed;
 
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import java.util.List;
-
 public class Configuration {
     
     private int teleportCooldown;
     private int maxX;
     private int maxZ;
-    private List<String> plugins;
+    private boolean hasWorldguard;
     private Unclaimed instance;
     
     private YamlConfiguration config;
-
     private static YamlConfiguration defaults;
 
     static {
@@ -21,7 +18,7 @@ public class Configuration {
         defaults.set("teleport-cooldown", 60);
         defaults.set("max-search-x", 5000);
         defaults.set("max-search-z", 5000);
-        defaults.set("plugins", new String[]{"WorldGuard"});
+        defaults.set("wrap-worldguard", false);
     }
 
     public Configuration(Unclaimed instance) {
@@ -29,13 +26,13 @@ public class Configuration {
         reload();
     }
     
-    public void reload() {
+    protected void reload() {
         config = (YamlConfiguration) instance.getConfig();
         config.setDefaults(defaults);
         teleportCooldown = config.getInt("teleport-cooldown");
         maxX = config.getInt("max-search-x");
         maxZ = config.getInt("max-search-z");
-        plugins = config.getStringList("plugins");
+        hasWorldguard = config.getBoolean("wrap-worldguard");
     }
 
     public int getTeleportCooldown() {
@@ -50,7 +47,8 @@ public class Configuration {
         return maxZ;
     }
 
-    public List<String> getPlugins() {
-        return plugins;
+    public Boolean hasWorldguard() {
+        return hasWorldguard;
     }
+
 }

@@ -1,6 +1,7 @@
 package net.betterverse.unclaimed.commands;
 
 import net.betterverse.unclaimed.Unclaimed;
+import net.betterverse.unclaimed.util.CheckProtection;
 import net.betterverse.unclaimed.util.Protection;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
@@ -66,24 +67,11 @@ public class UnclaimedCommmand implements CommandExecutor {
     }
 
     private String getProtection(Location location) {
-        for (String plugin : instance.getConfiguration().getPlugins()) {
-            try {
-                Protection protection = (Protection) Class.forName(plugin).newInstance();
-                if (protection.isProtected(location)) {
-                    return protection.getName();
-                }
-            } catch (ClassNotFoundException e) {
-                Bukkit.getLogger().warning("Protection method " + plugin + " not found");
-            } catch (Exception e) {
-                Bukkit.getLogger().severe("Exception occurred");
-                e.printStackTrace();
-            }
-        }
-        return null;
+        return CheckProtection.isProtected(location).toString();
     }
 
     private String getProtection(Chunk chunk) {
-        return getProtection(chunk.getBlock(0, 0, 0).getLocation());
+        return CheckProtection.isProtected(chunk).toString();
     }
 
     private void teleport(Player player) {
