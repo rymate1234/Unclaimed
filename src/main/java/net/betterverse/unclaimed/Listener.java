@@ -7,6 +7,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockCanBuildEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.hanging.HangingBreakByEntityEvent;
+import org.bukkit.event.hanging.HangingPlaceEvent;
 import org.bukkit.event.player.PlayerBucketEvent;
 
 
@@ -44,6 +46,28 @@ public class Listener implements org.bukkit.event.Listener {
         ProtectionInfo protectionInfo = CheckProtection.isProtected(player.getLocation());
         if (!protectionInfo.isProtected() && !player.hasPermission("unclaimed.break")) {
             event.setCancelled(true);
+            player.sendMessage(instance.getDescription().getPrefix() + instance.getConfiguration().getBuildMessage());
+        }
+    }
+    
+    @EventHandler(ignoreCancelled = true)
+    public void onHangingBreakByEntity(HangingBreakByEntityEvent e) {
+        if (e.getRemover() instanceof Player) {
+            Player player = (Player)e.getRemover();
+            ProtectionInfo protectionInfo = CheckProtection.isProtected(player.getLocation());
+            if (!protectionInfo.isProtected() && !player.hasPermission("unclaimed.break")) {
+                e.setCancelled(true);
+                player.sendMessage(instance.getDescription().getPrefix() + instance.getConfiguration().getBuildMessage());
+            }
+        }
+    }
+    
+    @EventHandler(ignoreCancelled = true)
+    public void onHangingPlace(HangingPlaceEvent e) {
+        Player player = e.getPlayer();
+        ProtectionInfo protectionInfo = CheckProtection.isProtected(player.getLocation());
+        if (!protectionInfo.isProtected() && !player.hasPermission("unclaimed.break")) {
+            e.setCancelled(true);
             player.sendMessage(instance.getDescription().getPrefix() + instance.getConfiguration().getBuildMessage());
         }
     }
