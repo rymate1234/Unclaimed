@@ -50,7 +50,7 @@
 
         <resources>
             <resource>
-                <directory>${basedir}/src/main/java/</directory>
+                <directory>${basedir}/src/main/resources/</directory>
                 <filtering>true</filtering>
                 <includes>
                     <include>plugin.yml</include>
