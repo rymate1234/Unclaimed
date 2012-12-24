@@ -1,5 +1,5 @@
 name: Unclaimed
-main: net.betterverse.unclaimed.Unclaimedaimed
+main: net.betterverse.unclaimed.Unclaimed
 version: 1.0
 authors: [ChrizC, petteyg359]
 softdepend: [WorldGuard]
