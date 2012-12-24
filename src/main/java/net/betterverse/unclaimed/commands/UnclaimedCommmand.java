@@ -39,7 +39,7 @@ public class UnclaimedCommmand implements CommandExecutor {
             } else if (args.length == 1) {
                 if (args[0].equalsIgnoreCase("reload")) {
                     if (sender.hasPermission("unclaimed.reload")) {
-                        instance.reloadConfig();
+                        instance.reloadCustomConfig();
                     } else {
                         sender.sendMessage("You are not permitted.");
                     }
@@ -56,7 +56,7 @@ public class UnclaimedCommmand implements CommandExecutor {
             }
         } else {
             if (args.length == 1 && args[0].equalsIgnoreCase("reload")) {
-                instance.reloadConfig();
+                instance.reloadCustomConfig();
                 return true;
             } else {
                 sender.sendMessage(instance.getDescription().getPrefix() + "Console cannot do this.");

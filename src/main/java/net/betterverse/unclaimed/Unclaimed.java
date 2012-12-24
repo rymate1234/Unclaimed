@@ -34,9 +34,8 @@ public class Unclaimed extends JavaPlugin {
     /**
      * Reloads configuration file and {@link Configuration} class
      */
-    @Override
-    public void reloadConfig() {
-        super.reloadConfig();
+    public void reloadCustomConfig() {
+        reloadConfig();
         configuration.reload();
     }
 }
