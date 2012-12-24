@@ -2,7 +2,7 @@ name: Unclaimed
 main: net.betterverse.unclaimed.Unclaimedaimed
 version: 1.0
 authors: [ChrizC, petteyg359]
-softdepend: [MyChunks, WorldGuard, Communities]
+softdepend: [WorldGuard]
 commands:
   unclaimed:
     description: Interact with the plugin.
