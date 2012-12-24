@@ -16,7 +16,7 @@ public class Unclaimed extends JavaPlugin {
         configuration = new Configuration(this);
         Bukkit.getServer().getPluginCommand("unclaimed").setExecutor(new UnclaimedCommmand(this));
         Bukkit.getLogger().info("Loaded " + this.getDescription().getVersion());
-        if (getConfiguration().hasWorldguard()) {
+        if (getConfiguration().wrapWorldguard()) {
             try {
                 WorldguardWrapper worldguardWrapper = new WorldguardWrapper();
                 UnclaimedRegistry.registerClass(worldguardWrapper);
@@ -24,7 +24,7 @@ public class Unclaimed extends JavaPlugin {
                 Bukkit.getLogger().warning("WorldGuard wrapping enabled in configuration, but WorldGuard not found");
             }
         }
-
+        Bukkit.getPluginManager().registerEvents(new Listener(this), this);
     }
 
     public Configuration getConfiguration() {
