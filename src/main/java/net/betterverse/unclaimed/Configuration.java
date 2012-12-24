@@ -3,11 +3,12 @@ package net.betterverse.unclaimed;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 public class Configuration {
-    
-    private int teleportCooldown;
+
+    private String buildMessage;
     private int maxX;
     private int maxZ;
-    private boolean hasWorldguard;
+    private int teleportCooldown;
+    private boolean wrapWorldguard;
     private Unclaimed instance;
     
     private YamlConfiguration config;
@@ -15,9 +16,10 @@ public class Configuration {
 
     static {
         defaults = new YamlConfiguration();
-        defaults.set("teleport-cooldown", 60);
+        defaults.set("build-message", "You do not have permission to build here.");
         defaults.set("max-search-x", 5000);
         defaults.set("max-search-z", 5000);
+        defaults.set("teleport-cooldown", 60);
         defaults.set("wrap-worldguard", false);
     }
 
@@ -29,14 +31,15 @@ public class Configuration {
     protected void reload() {
         config = (YamlConfiguration) instance.getConfig();
         config.setDefaults(defaults);
-        teleportCooldown = config.getInt("teleport-cooldown");
+        buildMessage = config.getString("break-message");
         maxX = config.getInt("max-search-x");
         maxZ = config.getInt("max-search-z");
-        hasWorldguard = config.getBoolean("wrap-worldguard");
+        teleportCooldown = config.getInt("teleport-cooldown");
+        wrapWorldguard = config.getBoolean("wrap-worldguard");
     }
 
-    public int getTeleportCooldown() {
-        return teleportCooldown;
+    public String getBuildMessage() {
+        return buildMessage;
     }
 
     public int getMaxX() {
@@ -47,8 +50,11 @@ public class Configuration {
         return maxZ;
     }
 
-    public Boolean hasWorldguard() {
-        return hasWorldguard;
+    public int getTeleportCooldown() {
+        return teleportCooldown;
     }
 
+    public Boolean wrapWorldguard() {
+        return wrapWorldguard;
+    }
 }
