@@ -9,7 +9,9 @@ import org.bukkit.event.block.BlockCanBuildEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.hanging.HangingBreakByEntityEvent;
 import org.bukkit.event.hanging.HangingPlaceEvent;
+import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.bukkit.event.player.PlayerBucketEvent;
+import org.bukkit.event.player.PlayerBucketFillEvent;
 
 
 public class Listener implements org.bukkit.event.Listener {
@@ -41,7 +43,17 @@ public class Listener implements org.bukkit.event.Listener {
     }
 
     @EventHandler(ignoreCancelled = true)
-    public void onPlayerBucket(PlayerBucketEvent event) {
+    public void onPlayerBucket(PlayerBucketEmptyEvent event) {
+        Player player = event.getPlayer();
+        ProtectionInfo protectionInfo = CheckProtection.isProtected(player.getLocation());
+        if (!protectionInfo.isProtected() && !player.hasPermission("unclaimed.break")) {
+            event.setCancelled(true);
+            player.sendMessage(instance.getDescription().getPrefix() + instance.getConfiguration().getBuildMessage());
+        }
+    }
+    
+    @EventHandler(ignoreCancelled = true)
+    public void onPlayerBucket(PlayerBucketFillEvent event) {
         Player player = event.getPlayer();
         ProtectionInfo protectionInfo = CheckProtection.isProtected(player.getLocation());
         if (!protectionInfo.isProtected() && !player.hasPermission("unclaimed.break")) {
