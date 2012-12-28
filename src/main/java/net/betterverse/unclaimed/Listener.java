@@ -56,7 +56,7 @@ public class Listener implements org.bukkit.event.Listener {
 
     public boolean checkProtection(Player player, Location location) {
         ProtectionInfo protectionInfo = CheckProtection.isProtected(player.getLocation());
-        if (!protectionInfo.isProtected() && !player.hasPermission("unclaimed.break")) {
+        if (!protectionInfo.isProtected() && !player.hasPermission("unclaimed.build")) {
             player.sendMessage(instance.getDescription().getPrefix() +" "+ instance.getConfiguration().getBuildMessage());
             return true;
         }
