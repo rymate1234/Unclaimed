@@ -31,7 +31,7 @@ public class Configuration {
     protected void reload() {
         config = (YamlConfiguration) instance.getConfig();
         config.setDefaults(defaults);
-        buildMessage = config.getString("break-message");
+        buildMessage = config.getString("build-message");
         maxX = config.getInt("max-search-x");
         maxZ = config.getInt("max-search-z");
         teleportCooldown = config.getInt("teleport-cooldown");

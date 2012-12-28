@@ -2,15 +2,15 @@ package net.betterverse.unclaimed;
 
 import net.betterverse.unclaimed.util.CheckProtection;
 import net.betterverse.unclaimed.util.ProtectionInfo;
+
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockCanBuildEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.hanging.HangingBreakByEntityEvent;
 import org.bukkit.event.hanging.HangingPlaceEvent;
 import org.bukkit.event.player.PlayerBucketEmptyEvent;
-import org.bukkit.event.player.PlayerBucketEvent;
 import org.bukkit.event.player.PlayerBucketFillEvent;
 
 
@@ -24,63 +24,42 @@ public class Listener implements org.bukkit.event.Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onBlockBreak(BlockBreakEvent event) {
-        Player player = event.getPlayer();
-        ProtectionInfo protectionInfo = CheckProtection.isProtected(player.getLocation());
-        if (!protectionInfo.isProtected() && !player.hasPermission("unclaimed.break")) {
-            event.setCancelled(true);
-            player.sendMessage(instance.getDescription().getPrefix() + instance.getConfiguration().getBuildMessage());
-        }
+        event.setCancelled(checkProtection(event.getPlayer(), event.getBlock().getLocation()));
     }
 
     @EventHandler(ignoreCancelled = true)
     public void onBlockPlace(BlockPlaceEvent event) {
-        Player player = event.getPlayer();
-        ProtectionInfo protectionInfo = CheckProtection.isProtected(player.getLocation());
-        if (!protectionInfo.isProtected() && !player.hasPermission("unclaimed.break")) {
-            event.setCancelled(true);
-            player.sendMessage(instance.getDescription().getPrefix() + instance.getConfiguration().getBuildMessage());
-        }
+        event.setCancelled(checkProtection(event.getPlayer(), event.getBlock().getLocation()));
     }
 
     @EventHandler(ignoreCancelled = true)
     public void onPlayerBucket(PlayerBucketEmptyEvent event) {
-        Player player = event.getPlayer();
-        ProtectionInfo protectionInfo = CheckProtection.isProtected(player.getLocation());
-        if (!protectionInfo.isProtected() && !player.hasPermission("unclaimed.break")) {
-            event.setCancelled(true);
-            player.sendMessage(instance.getDescription().getPrefix() + instance.getConfiguration().getBuildMessage());
-        }
+        event.setCancelled(checkProtection(event.getPlayer(), event.getBlockClicked().getLocation()));
     }
-    
+
     @EventHandler(ignoreCancelled = true)
     public void onPlayerBucket(PlayerBucketFillEvent event) {
-        Player player = event.getPlayer();
-        ProtectionInfo protectionInfo = CheckProtection.isProtected(player.getLocation());
-        if (!protectionInfo.isProtected() && !player.hasPermission("unclaimed.break")) {
-            event.setCancelled(true);
-            player.sendMessage(instance.getDescription().getPrefix() + instance.getConfiguration().getBuildMessage());
-        }
+        event.setCancelled(checkProtection(event.getPlayer(), event.getBlockClicked().getLocation()));
     }
-    
+
     @EventHandler(ignoreCancelled = true)
     public void onHangingBreakByEntity(HangingBreakByEntityEvent e) {
         if (e.getRemover() instanceof Player) {
-            Player player = (Player)e.getRemover();
-            ProtectionInfo protectionInfo = CheckProtection.isProtected(player.getLocation());
-            if (!protectionInfo.isProtected() && !player.hasPermission("unclaimed.break")) {
-                e.setCancelled(true);
-                player.sendMessage(instance.getDescription().getPrefix() + instance.getConfiguration().getBuildMessage());
-            }
+            e.setCancelled(checkProtection((Player)e.getRemover(), e.getEntity().getLocation()));
         }
     }
-    
+
     @EventHandler(ignoreCancelled = true)
     public void onHangingPlace(HangingPlaceEvent e) {
-        Player player = e.getPlayer();
+        e.setCancelled(checkProtection(e.getPlayer(), e.getEntity().getLocation()));
+    }
+
+    public boolean checkProtection(Player player, Location location) {
         ProtectionInfo protectionInfo = CheckProtection.isProtected(player.getLocation());
         if (!protectionInfo.isProtected() && !player.hasPermission("unclaimed.break")) {
-            e.setCancelled(true);
-            player.sendMessage(instance.getDescription().getPrefix() + instance.getConfiguration().getBuildMessage());
+            player.sendMessage(instance.getDescription().getPrefix() +" "+ instance.getConfiguration().getBuildMessage());
+            return true;
         }
+        return false;
     }
 }
