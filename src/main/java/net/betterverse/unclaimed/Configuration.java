@@ -44,6 +44,7 @@ public class Configuration {
         maxZ = config.getInt("max-search-z");
         teleportCooldown = config.getInt("teleport-cooldown");
         wrapWorldguard = config.getBoolean("wrap-worldguard");
+        config.options().copyDefaults(true);
     }
 
     public String getBuildMessage() {
