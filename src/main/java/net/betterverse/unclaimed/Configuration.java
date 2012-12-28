@@ -1,5 +1,8 @@
 package net.betterverse.unclaimed;
 
+import java.io.File;
+import java.io.IOException;
+
 import org.bukkit.configuration.file.YamlConfiguration;
 
 public class Configuration {
@@ -26,6 +29,11 @@ public class Configuration {
     public Configuration(Unclaimed instance) {
         this.instance = instance;
         reload();
+        try {
+            config.save(new File(instance.getDataFolder(), "config.yml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
     protected void reload() {
