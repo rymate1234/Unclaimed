@@ -1,6 +1,7 @@
 package net.betterverse.unclaimed;
 
 import net.betterverse.unclaimed.commands.UnclaimedCommmand;
+import net.betterverse.unclaimed.util.RegenerationRunnable;
 import net.betterverse.unclaimed.util.UnclaimedRegistry;
 import net.betterverse.unclaimed.util.WorldguardWrapper;
 import org.bukkit.Bukkit;
@@ -25,6 +26,7 @@ public class Unclaimed extends JavaPlugin {
             }
         }
         Bukkit.getPluginManager().registerEvents(new Listener(this), this);
+        new RegenerationRunnable(this, getConfiguration().getActiveRegenerationWorlds()).runTaskLater(this, getConfiguration().getRegenerationOffset() * 60 * 20);
     }
 
     public Configuration getConfiguration() {

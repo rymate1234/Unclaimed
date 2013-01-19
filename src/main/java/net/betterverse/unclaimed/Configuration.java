@@ -2,6 +2,8 @@ package net.betterverse.unclaimed;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -12,6 +14,8 @@ public class Configuration {
     private int maxZ;
     private int teleportCooldown;
     private boolean wrapWorldguard;
+    private List<String> activeRegenerationWorlds;
+    private int regenerationOffset;
     private Unclaimed instance;
     
     private YamlConfiguration config;
@@ -24,6 +28,10 @@ public class Configuration {
         defaults.set("max-search-z", 5000);
         defaults.set("teleport-cooldown", 60);
         defaults.set("wrap-worldguard", false);
+        List<String> defaultWorlds = new ArrayList<String>();
+        defaultWorlds.add("world");
+        defaults.set("regeneration-worlds", defaultWorlds);
+        defaults.set("regeneration-interval", 360);
     }
 
     public Configuration(Unclaimed instance) {
@@ -44,6 +52,8 @@ public class Configuration {
         maxZ = config.getInt("max-search-z");
         teleportCooldown = config.getInt("teleport-cooldown");
         wrapWorldguard = config.getBoolean("wrap-worldguard");
+        activeRegenerationWorlds = config.getStringList("regeneration-worlds");
+        regenerationOffset = config.getInt("regeneration-interval");
         config.options().copyDefaults(true);
     }
 
@@ -65,5 +75,13 @@ public class Configuration {
 
     public Boolean wrapWorldguard() {
         return wrapWorldguard;
+    }
+    
+    public List<String> getActiveRegenerationWorlds() {
+        return activeRegenerationWorlds;
+    }
+    
+    public int getRegenerationOffset() {
+        return regenerationOffset;
     }
 }
