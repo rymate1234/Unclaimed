@@ -26,6 +26,7 @@ public class RegenerationRunnable extends BukkitRunnable {
         int offset = 0;
         for (String w : worlds) {
             final World world = Bukkit.getWorld(w);
+            if (world == null) continue;
             for (final Chunk c : world.getLoadedChunks()) {
                 ProtectionInfo info = CheckProtection.isProtected(c);
                 if (!info.isProtected()) {
