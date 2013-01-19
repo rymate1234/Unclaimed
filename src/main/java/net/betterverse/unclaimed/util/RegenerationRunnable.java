@@ -19,6 +19,7 @@ public class RegenerationRunnable extends BukkitRunnable {
     
     public RegenerationRunnable(JavaPlugin plugin, List<String> worlds) {
         this.worlds = worlds;
+        this.plugin = plugin;
     }
 
     @Override
