@@ -29,9 +29,8 @@ public class Configuration {
         defaults.set("teleport-cooldown", 60);
         defaults.set("wrap-worldguard", false);
         List<String> defaultWorlds = new ArrayList<String>();
-        defaultWorlds.add("world");
         defaults.set("regeneration-worlds", defaultWorlds);
-        defaults.set("regeneration-interval", 360);
+        defaults.set("regeneration-interval", 12);
     }
 
     public Configuration(Unclaimed instance) {
