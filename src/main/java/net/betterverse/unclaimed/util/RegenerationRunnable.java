@@ -7,6 +7,7 @@ import java.util.Map;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.World;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -31,6 +32,16 @@ public class RegenerationRunnable extends BukkitRunnable {
             for (final Chunk c : world.getLoadedChunks()) {
                 ProtectionInfo info = CheckProtection.isProtected(c);
                 if (!info.isProtected()) {
+                    boolean containsPlayers = false;
+                    for (Player p : Bukkit.getOnlinePlayers()) {
+                        if (p.getLocation().getBlock().getChunk().equals(c)) {
+                            containsPlayers = true;
+                            break;
+                        }
+                    }
+                    if (containsPlayers) {
+                        continue;
+                    }
                     Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
                         public void run() {
                             world.regenerateChunk(c.getX(), c.getZ());
