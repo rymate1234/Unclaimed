@@ -12,12 +12,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class RegenerationRunnable extends BukkitRunnable {
-    
+
     // This is all the chunks that have been regenerated since the last startup.  Key is the X coordinate, Value is Z.
     static Map<Integer, Integer> regenerated = new HashMap<Integer, Integer>();
     JavaPlugin plugin;
     List<String> worlds;
-    
+
     public RegenerationRunnable(JavaPlugin plugin, List<String> worlds) {
         this.worlds = worlds;
         this.plugin = plugin;
@@ -44,7 +44,9 @@ public class RegenerationRunnable extends BukkitRunnable {
                     }
                     Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
                         public void run() {
-                            world.regenerateChunk(c.getX(), c.getZ());
+                            if (!CheckProtection.isProtected(c).isProtected()) {
+                                world.regenerateChunk(c.getX(), c.getZ());
+                            }
                         }
                     }, offset);
                     regenerated.put(c.getX(), c.getZ());
@@ -53,7 +55,7 @@ public class RegenerationRunnable extends BukkitRunnable {
             }
         }
     }
-    
+
     public static void clearRegeneratedChunks() {
         regenerated.clear();
     }
