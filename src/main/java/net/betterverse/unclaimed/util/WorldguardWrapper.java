@@ -1,10 +1,12 @@
 package net.betterverse.unclaimed.util;
 
+import com.sk89q.worldguard.bukkit.BukkitPlayer;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 
 public class WorldguardWrapper implements Protection {
     private WorldGuardPlugin plugin;
@@ -107,5 +109,11 @@ public class WorldguardWrapper implements Protection {
         }
         return plugin.getRegionManager(location.getWorld()).getApplicableRegions(location).size() > 0;
     }
+
+	@Override
+	public boolean isProtectedFrom(Player player, Location location)
+	{
+		return plugin.getRegionManager(location.getWorld()).getApplicableRegions(location).isMemberOfAll(new BukkitPlayer(plugin, player));
+	}
 
 }

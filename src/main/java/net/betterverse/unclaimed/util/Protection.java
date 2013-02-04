@@ -2,6 +2,7 @@ package net.betterverse.unclaimed.util;
 
 import org.bukkit.Chunk;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 
 /**
  * An interface defining a protection provider for Unclaimed
@@ -37,4 +38,5 @@ public interface Protection {
      */
     public boolean isProtected(Location location);
 
+    public boolean isProtectedFrom(Player player, Location location);
 }
