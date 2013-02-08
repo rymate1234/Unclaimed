@@ -53,10 +53,14 @@ public class CheckProtection {
     {
         for (Protection protection : UnclaimedRegistry.getProtections()) {
             if (protection.isProtectedFrom(player, location)) {
-                return new ProtectionInfo(
+            	ProtectionInfo info = new ProtectionInfo(
                         protection.getName() != null ? protection.getName() : protection.getClass().getSimpleName(),
                         protection.getMessage(location) != null ? protection.getMessage(location) : null
                         );
+            	
+            	System.out.println("PROTECTION INFO: " + info.toString());
+            	
+            	return info;
             }
         }
         return ProtectionInfo.UNPROTECTED;
