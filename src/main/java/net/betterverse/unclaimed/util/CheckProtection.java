@@ -58,8 +58,6 @@ public class CheckProtection {
                         protection.getMessage(location) != null ? protection.getMessage(location) : null
                         );
             	
-            	System.out.println("PROTECTION INFO: " + info.toString());
-            	
             	return info;
             }
         }
