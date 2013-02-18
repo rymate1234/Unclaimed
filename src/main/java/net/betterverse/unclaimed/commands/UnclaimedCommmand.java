@@ -25,9 +25,9 @@ public class UnclaimedCommmand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
         if (sender instanceof Player) {
             if (args.length == 0) {
-                String protection = getProtection(((Player) sender).getLocation());
+                Boolean protection = getProtection(((Player) sender).getLocation());
                 StringBuilder message = new StringBuilder("Your location is ");
-                if (protection == null) {
+                if (protection == Boolean.FALSE) {
                     message.append("not protected.");
                 } else {
                     message.append("protected by ");
@@ -66,12 +66,12 @@ public class UnclaimedCommmand implements CommandExecutor {
         return true;
     }
 
-    private String getProtection(Location location) {
-        return CheckProtection.isProtected(location).toString();
+    private Boolean getProtection(Location location) {
+        return CheckProtection.isProtected(location).isProtected();
     }
 
-    private String getProtection(Chunk chunk) {
-        return CheckProtection.isProtected(chunk).toString();
+    private Boolean getProtection(Chunk chunk) {
+        return CheckProtection.isProtected(chunk).isProtected();
     }
 
     private void teleport(Player player) {
@@ -85,7 +85,7 @@ public class UnclaimedCommmand implements CommandExecutor {
             x = random.nextInt(instance.getConfiguration().getMaxX() * 2) - instance.getConfiguration().getMaxX();
             z = random.nextInt(instance.getConfiguration().getMaxZ() * 2) - instance.getConfiguration().getMaxZ();
             chunk = player.getWorld().getChunkAt(x, z);
-        } while (getProtection(chunk) != null && i < 100);
+        } while (getProtection(chunk) == Boolean.FALSE && i < 100);
         if (i == 100) {
             player.sendMessage("Gave up looking for unclaimed chunk after 100 tries.");
         } else {
