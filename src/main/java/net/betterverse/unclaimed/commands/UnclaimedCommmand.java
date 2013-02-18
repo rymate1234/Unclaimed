@@ -1,8 +1,9 @@
 package net.betterverse.unclaimed.commands;
 
+import java.util.ArrayList;
+import java.util.List;
 import net.betterverse.unclaimed.Unclaimed;
 import net.betterverse.unclaimed.util.CheckProtection;
-import net.betterverse.unclaimed.util.Protection;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -16,6 +17,14 @@ import java.util.Random;
 public class UnclaimedCommmand implements CommandExecutor {
 
     private Unclaimed instance;
+    
+    //cache of recently found chunks. if a teleport request finds a chunk before it reaches its search limit,
+    //it will continue until it hits the search limit or until the cache reaches a size of 20.
+    
+    //if a chunk is pulled from the cache on request, the search will not commence.
+    //CURRENTLY NOT IMPLEMENTED. NOTE TO FUTURE DEVS:
+    //IF THIS MESSAGE REMAINS AFTER 20/02/2013, FEEL FREE TO DELETE THE FOLLOWING LINE.
+    private List<Chunk> cache = new ArrayList<Chunk>();
 
     public UnclaimedCommmand(Unclaimed instance) {
         this.instance = instance;
@@ -75,6 +84,11 @@ public class UnclaimedCommmand implements CommandExecutor {
     }
 
     private void teleport(Player player) {
+        if (!player.getWorld().getName().equalsIgnoreCase("world")) {
+            player.sendMessage("This command is not available for the world " + player.getWorld().getName());
+            return;
+        }
+        
         Random random = new Random();
         int x;
         int z;
@@ -85,7 +99,7 @@ public class UnclaimedCommmand implements CommandExecutor {
             x = random.nextInt(instance.getConfiguration().getMaxX() * 2) - instance.getConfiguration().getMaxX();
             z = random.nextInt(instance.getConfiguration().getMaxZ() * 2) - instance.getConfiguration().getMaxZ();
             chunk = player.getWorld().getChunkAt(x, z);
-        } while (getProtection(chunk) == Boolean.FALSE && i < 100);
+        } while (getProtection(chunk) == Boolean.TRUE && i < 100);
         if (i == 100) {
             player.sendMessage("Gave up looking for unclaimed chunk after 100 tries.");
         } else {
