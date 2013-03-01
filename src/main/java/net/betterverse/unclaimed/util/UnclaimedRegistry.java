@@ -59,7 +59,7 @@ public class UnclaimedRegistry {
         return "";
     }
     
-    public static String getProtectedBy(Chunk c) {
+    public static String getChunkProtectedBy(Chunk c) {
         for (ProtectionProvider pp : protections) {
             if (pp.isProtected(c)) return pp.getName();
         }
@@ -75,7 +75,7 @@ public class UnclaimedRegistry {
         return "";
     }
     
-    public static String getProtectedReason(Chunk c) {
+    public static String getChunkProtectedReason(Chunk c) {
         for (ProtectionProvider pp : protections) {
             if (pp.isProtected(c)) return pp.getMessage(c);
         }

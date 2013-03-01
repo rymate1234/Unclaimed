@@ -18,3 +18,6 @@ permissions:
   unclaimed.build:
     default: op
     description: Allows the player to break blocks in unclaimed areas.
+  unclaimed.admin.regen:
+    default: op
+    description: Allows the player to regen current chunk if it's unprotected.
