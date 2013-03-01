@@ -1,0 +1,7 @@
+build-message: "You do not have permission to build here."
+max-search-x: 5000
+max-search-z: 5000
+teleport-cooldown: 60
+regeneration-worlds:
+  - "world"
+regeneration-interval: 12

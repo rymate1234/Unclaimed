@@ -3,7 +3,6 @@ package net.betterverse.unclaimed.commands;
 import java.util.ArrayList;
 import java.util.List;
 import net.betterverse.unclaimed.Unclaimed;
-import net.betterverse.unclaimed.util.CheckProtection;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -13,6 +12,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.Random;
+import net.betterverse.unclaimed.util.UnclaimedRegistry;
 
 public class UnclaimedCommmand implements CommandExecutor {
 
@@ -34,13 +34,14 @@ public class UnclaimedCommmand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
         if (sender instanceof Player) {
             if (args.length == 0) {
-                Boolean protection = getProtection(((Player) sender).getLocation());
+                //Boolean protection = getProtection(((Player) sender).getLocation());
                 StringBuilder message = new StringBuilder("Your location is ");
-                if (protection == Boolean.FALSE) {
+                Player p = (Player)sender;
+                if (!UnclaimedRegistry.isProtected(p.getLocation())) {
                     message.append("not protected.");
                 } else {
                     message.append("protected by ");
-                    message.append(protection);
+                    message.append(UnclaimedRegistry.getProtectedBy(p.getLocation()));
                     message.append(".");
                 }
                 sender.sendMessage(message.toString());
@@ -75,14 +76,6 @@ public class UnclaimedCommmand implements CommandExecutor {
         return true;
     }
 
-    private Boolean getProtection(Location location) {
-        return CheckProtection.isProtected(location).isProtected();
-    }
-
-    private Boolean getProtection(Chunk chunk) {
-        return CheckProtection.isProtected(chunk).isProtected();
-    }
-
     private void teleport(Player player) {
         if (!player.getWorld().getName().equalsIgnoreCase("world")) {
             player.sendMessage("This command is not available for the world " + player.getWorld().getName());
@@ -99,7 +92,7 @@ public class UnclaimedCommmand implements CommandExecutor {
             x = random.nextInt(instance.getConfiguration().getMaxX() * 2) - instance.getConfiguration().getMaxX();
             z = random.nextInt(instance.getConfiguration().getMaxZ() * 2) - instance.getConfiguration().getMaxZ();
             chunk = player.getWorld().getChunkAt(x, z);
-        } while (getProtection(chunk) == Boolean.TRUE && i < 100);
+        } while (UnclaimedRegistry.isProtected(chunk) && i < 100);
         if (i == 100) {
             player.sendMessage("Gave up looking for unclaimed chunk after 100 tries.");
         } else {

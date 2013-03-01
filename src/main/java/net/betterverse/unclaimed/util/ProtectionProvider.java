@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 /**
  * An interface defining a protection provider for Unclaimed
  */
-public interface Protection {
+public interface ProtectionProvider {
 
     /**
      * @param chunk {@link org.bukkit.Chunk} to check

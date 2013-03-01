@@ -3,7 +3,6 @@ package net.betterverse.unclaimed.util;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.World;
@@ -30,8 +29,7 @@ public class RegenerationRunnable extends BukkitRunnable {
             final World world = Bukkit.getWorld(w);
             if (world == null) continue;
             for (final Chunk c : world.getLoadedChunks()) {
-                ProtectionInfo info = CheckProtection.isProtected(c);
-                if (!info.isProtected()) {
+                if (!UnclaimedRegistry.isProtected(c)) {
                     boolean containsPlayers = false;
                     for (Player p : Bukkit.getOnlinePlayers()) {
                         if (p.getLocation().getBlock().getChunk().equals(c)) {
@@ -44,7 +42,7 @@ public class RegenerationRunnable extends BukkitRunnable {
                     }
                     Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
                         public void run() {
-                            if (!CheckProtection.isProtected(c).isProtected()) {
+                            if (!UnclaimedRegistry.isProtected(c)) {
                                 world.regenerateChunk(c.getX(), c.getZ());
                             }
                         }

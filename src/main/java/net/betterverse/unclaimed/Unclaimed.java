@@ -17,13 +17,11 @@ public class Unclaimed extends JavaPlugin {
         configuration = new Configuration(this);
         Bukkit.getServer().getPluginCommand("unclaimed").setExecutor(new UnclaimedCommmand(this));
         Bukkit.getLogger().info("Loaded " + this.getDescription().getVersion());
-        if (getConfiguration().wrapWorldguard()) {
-            try {
-                WorldguardWrapper worldguardWrapper = new WorldguardWrapper();
-                UnclaimedRegistry.registerClass(worldguardWrapper);
-            } catch (ClassNotFoundException e) {
-                Bukkit.getLogger().warning("WorldGuard wrapping enabled in configuration, but WorldGuard not found");
-            }
+        try {
+            WorldguardWrapper worldguardWrapper = new WorldguardWrapper();
+            UnclaimedRegistry.registerClass(worldguardWrapper);
+        } catch (ClassNotFoundException e) {
+            Bukkit.getLogger().warning("WorldGuard not found");
         }
         Bukkit.getPluginManager().registerEvents(new Listener(this), this);
         new RegenerationRunnable(this, getConfiguration().getActiveRegenerationWorlds()).runTaskTimer(this, getConfiguration().getRegenerationOffset() * 60 * 20, getConfiguration().getRegenerationOffset() * 3600 * 20);

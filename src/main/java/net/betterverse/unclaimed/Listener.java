@@ -1,8 +1,6 @@
 package net.betterverse.unclaimed;
 
-import net.betterverse.unclaimed.util.CheckProtection;
-import net.betterverse.unclaimed.util.ProtectionInfo;
-
+import net.betterverse.unclaimed.util.UnclaimedRegistry;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -55,11 +53,13 @@ public class Listener implements org.bukkit.event.Listener {
     }
 
     public boolean checkProtection(Player player, Location location) {
-        ProtectionInfo protectionInfo = CheckProtection.isProtected(player.getLocation());
+        /*ProtectionInfo protectionInfo = CheckProtection.isProtected(player.getLocation());
         if (!protectionInfo.isProtected() && !player.hasPermission("unclaimed.build")) {
             player.sendMessage(instance.getDescription().getPrefix() +" "+ instance.getConfiguration().getBuildMessage());
             return true;
         }
-        return false;
+        return false;*/
+        
+        return UnclaimedRegistry.isProtected(location);
     }
 }

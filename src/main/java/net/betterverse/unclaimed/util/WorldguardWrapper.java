@@ -8,7 +8,7 @@ import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-public class WorldguardWrapper implements Protection {
+public class WorldguardWrapper implements ProtectionProvider {
     private WorldGuardPlugin plugin;
 
     public WorldguardWrapper() throws ClassNotFoundException {
@@ -110,10 +110,9 @@ public class WorldguardWrapper implements Protection {
         return plugin.getRegionManager(location.getWorld()).getApplicableRegions(location).size() > 0;
     }
 
-	@Override
-	public boolean isProtectedFrom(Player player, Location location)
-	{
-		return plugin.getRegionManager(location.getWorld()).getApplicableRegions(location).isMemberOfAll(new BukkitPlayer(plugin, player));
-	}
+    @Override
+    public boolean isProtectedFrom(Player player, Location location) {
+            return plugin.getRegionManager(location.getWorld()).getApplicableRegions(location).isMemberOfAll(new BukkitPlayer(plugin, player));
+    }
 
 }
