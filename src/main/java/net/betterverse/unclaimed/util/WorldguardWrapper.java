@@ -1,5 +1,6 @@
 package net.betterverse.unclaimed.util;
 
+import com.sk89q.worldedit.Vector;
 import com.sk89q.worldguard.bukkit.BukkitPlayer;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
@@ -77,7 +78,11 @@ public class WorldguardWrapper implements ProtectionProvider {
         if (plugin == null) {
             return false;
         }
-        for (int x = 0; x < 16; x++) {
+        
+        return plugin.getRegionManager(chunk.getWorld()).getApplicableRegions(chunk.getBlock(0, 0, 0).getLocation()).size() > 0;
+        //Vector v = toVector();
+        //return plugin.canBuild(null, null)
+        /*for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
                 for (int y = 64; y < 192; y--) { // Start in the middle height - most protections are likely to be here
                     if (plugin.getRegionManager(chunk.getWorld()).getApplicableRegions(chunk.getBlock(x, y, z).getLocation()).size() > 0)
@@ -93,7 +98,7 @@ public class WorldguardWrapper implements ProtectionProvider {
                 }
             }
         }
-        return false;
+        return false;*/
     }
 
     /**
