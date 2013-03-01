@@ -61,6 +61,17 @@ public class UnclaimedCommmand implements CommandExecutor {
                         sender.sendMessage("You are not permitted.");
                     }
                     return true;
+                } else if (args[0].equalsIgnoreCase("regen")) {
+                    if (sender.hasPermission("unclaimed.admin.regen")) {
+                        Player p = (Player)sender;
+                        if (UnclaimedRegistry.isProtected(p.getLocation())) {
+                            sender.sendMessage("Cannot regen chunk, it is protected!");
+                        } else {
+                            p.getWorld().regenerateChunk(p.getLocation().getChunk().getX(), p.getLocation().getChunk().getZ());
+                        }
+                    } else {
+                        sender.sendMessage("You are not permitted.");
+                    }
                 }
                 return false;
             }

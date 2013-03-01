@@ -58,5 +58,29 @@ public class UnclaimedRegistry {
         
         return "";
     }
+    
+    public static String getProtectedBy(Chunk c) {
+        for (ProtectionProvider pp : protections) {
+            if (pp.isProtected(c)) return pp.getName();
+        }
+        
+        return "";
+    }
+    
+    public static String getProtectedReason(Location loc) {
+        for (ProtectionProvider pp : protections) {
+            if (pp.isProtected(loc)) return pp.getMessage(loc);
+        }
+        
+        return "";
+    }
+    
+    public static String getProtectedReason(Chunk c) {
+        for (ProtectionProvider pp : protections) {
+            if (pp.isProtected(c)) return pp.getMessage(c);
+        }
+        
+        return "";
+    }
 
 }
