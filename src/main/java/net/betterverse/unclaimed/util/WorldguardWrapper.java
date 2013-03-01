@@ -24,7 +24,7 @@ public class WorldguardWrapper implements ProtectionProvider {
         if (plugin == null) {
             return null;
         }
-        ApplicableRegionSet regions;
+       /* ApplicableRegionSet regions;
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
                 for (int y = 64; y < 192; y--) { // Start in the middle height - most protections are likely to be here
@@ -46,8 +46,8 @@ public class WorldguardWrapper implements ProtectionProvider {
                     }
                 }
             }
-        }
-        return null;
+        }*/
+        return "Claimed by WorldGuard.";
     }
 
     @Override
