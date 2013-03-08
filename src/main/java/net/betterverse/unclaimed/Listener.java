@@ -60,6 +60,6 @@ public class Listener implements org.bukkit.event.Listener {
         }
         return false;*/
         
-        return UnclaimedRegistry.isProtected(location);
+        return UnclaimedRegistry.isProtectedFrom(player, location);
     }
 }
