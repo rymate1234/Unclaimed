@@ -29,7 +29,7 @@ public class UnclaimedRegistry {
     
     public static boolean isProtected(Chunk chunk) {
         for (ProtectionProvider pp : protections) {
-            System.out.println("[Debug] Checking plugin " + pp.getName() + " for protected status: " + pp.isProtected(chunk));
+            //System.out.println("[Debug] Checking plugin " + pp.getName() + " for protected status: " + pp.isProtected(chunk));
             if (pp.isProtected(chunk)) return true;
         }
         
@@ -38,7 +38,7 @@ public class UnclaimedRegistry {
     
     public static boolean isProtected(Location loc) {
         for (ProtectionProvider pp : protections) {
-        	System.out.println("[Debug] Checking plugin " + pp.getName() + " for protected status: " + pp.isProtected(loc));
+        	//System.out.println("[Debug] Checking plugin " + pp.getName() + " for protected status: " + pp.isProtected(loc));
             if (pp.isProtected(loc)) return true;
         }
         
@@ -47,7 +47,7 @@ public class UnclaimedRegistry {
     
     public static boolean isProtectedFrom(Player player, Location loc) {
         for (ProtectionProvider pp : protections) {
-        	System.out.println("[Debug] Checking plugin " + pp.getName() + " for protected status: " + pp.isProtectedFrom(player, loc));
+        	//System.out.println("[Debug] Checking plugin " + pp.getName() + " for protected status: " + pp.isProtectedFrom(player, loc));
             if (pp.isProtectedFrom(player, loc)) return true;
         }
         
