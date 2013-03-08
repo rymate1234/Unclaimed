@@ -117,7 +117,7 @@ public class WorldguardWrapper implements ProtectionProvider {
 
     @Override
     public boolean isProtectedFrom(Player player, Location location) {
-            return plugin.getRegionManager(location.getWorld()).getApplicableRegions(location).isMemberOfAll(new BukkitPlayer(plugin, player));
+            return plugin.getRegionManager(location.getWorld()).getApplicableRegions(location).isMemberOfAll(plugin.wrapPlayer(player));
     }
 
 }
