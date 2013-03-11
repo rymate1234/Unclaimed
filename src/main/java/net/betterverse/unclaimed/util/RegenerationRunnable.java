@@ -31,6 +31,8 @@ public class RegenerationRunnable extends BukkitRunnable {
     		chunks: for (final Chunk c : world.getLoadedChunks()) {
     			System.out.println("Attempting to regenerate " + (16 * c.getX()) + ", " + (16 * c.getZ()));
     			
+    			System.out.println("Is protected: " + UnclaimedRegistry.isProtected(c) + ": " + UnclaimedRegistry.getChunkProtectedReason(c));
+    			
     			if(UnclaimedRegistry.isProtected(c))
     			{
     				System.out.println("Chunk is protected, aborting (" + UnclaimedRegistry.getChunkProtectedReason(c) + ")");
