@@ -54,6 +54,14 @@ public class UnclaimedRegistry {
         return false;
     }
     
+    public static String getProtectedFromBy(Location loc, Player p) {
+        for (ProtectionProvider pp : protections) {
+            if (pp.isProtectedFrom(p, loc)) return pp.getName();
+        }
+        
+        return "";
+    }
+    
     public static String getProtectedBy(Location loc) {
         for (ProtectionProvider pp : protections) {
             if (pp.isProtected(loc)) return pp.getName();
