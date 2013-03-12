@@ -54,6 +54,15 @@ public class UnclaimedRegistry {
         return false;
     }
     
+    public static boolean isProtectedFromNoWG(Player p, Location l) {
+        for (ProtectionProvider pp : protections) {
+            if (pp.getName().equalsIgnoreCase("WorldGuard")) continue;
+            if (pp.isProtectedFrom(p, l)) return true;
+        }
+        
+        return false;
+    }
+    
     public static String getProtectedFromBy(Location loc, Player p) {
         for (ProtectionProvider pp : protections) {
             if (pp.isProtectedFrom(p, loc)) return pp.getName();
