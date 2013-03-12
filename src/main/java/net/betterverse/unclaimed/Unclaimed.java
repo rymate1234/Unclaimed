@@ -24,9 +24,9 @@ public class Unclaimed extends JavaPlugin {
             Bukkit.getLogger().warning("WorldGuard not found");
         }
         Bukkit.getPluginManager().registerEvents(new Listener(this), this);
-        //new RegenerationRunnable(this, getConfiguration().getActiveRegenerationWorlds()).runTaskTimer(this, getConfiguration().getRegenerationOffset() * 60 * 20, getConfiguration().getRegenerationOffset() * 3600 * 20);
+        new RegenerationRunnable(this, getConfiguration().getActiveRegenerationWorlds()).runTaskTimer(this, getConfiguration().getRegenerationOffset() * 60 * 20, getConfiguration().getRegenerationOffset() * 3600 * 20);
         
-        new RegenerationRunnable(this, getConfiguration().getActiveRegenerationWorlds()).runTaskTimer(this, getConfiguration().getRegenerationOffset() * 20, getConfiguration().getRegenerationOffset() * 20);
+        //new RegenerationRunnable(this, getConfiguration().getActiveRegenerationWorlds()).runTaskTimer(this, getConfiguration().getRegenerationOffset() * 20, getConfiguration().getRegenerationOffset() * 20);
     }
 
     public Configuration getConfiguration() {

@@ -29,19 +29,19 @@ public class RegenerationRunnable extends BukkitRunnable {
     		final World world = Bukkit.getWorld(w);
     		if (world == null) continue;
     		chunks: for (final Chunk c : world.getLoadedChunks()) {
-    			System.out.println("Attempting to regenerate " + (16 * c.getX()) + ", " + (16 * c.getZ()));
+    			//System.out.println("Attempting to regenerate " + (16 * c.getX()) + ", " + (16 * c.getZ()));
     			
-    			System.out.println("Is protected: " + UnclaimedRegistry.isProtected(c) + ": " + UnclaimedRegistry.getChunkProtectedReason(c));
+    			//System.out.println("Is protected: " + UnclaimedRegistry.isProtected(c) + ": " + UnclaimedRegistry.getChunkProtectedReason(c));
     			
     			if(UnclaimedRegistry.isProtected(c))
     			{
-    				System.out.println("Chunk is protected, aborting (" + UnclaimedRegistry.getChunkProtectedReason(c) + ")");
+    				//System.out.println("Chunk is protected, aborting (" + UnclaimedRegistry.getChunkProtectedReason(c) + ")");
     				continue;
     			}
     			
 				for (Player p : Bukkit.getOnlinePlayers()) {
 					if (p.getLocation().getBlock().getChunk().equals(c)) {
-						System.out.println("Chunk contains players, aborting");
+						//System.out.println("Chunk contains players, aborting");
 						continue chunks;
 					}
 				}
@@ -50,7 +50,7 @@ public class RegenerationRunnable extends BukkitRunnable {
 				Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
 					public void run() {
 						world.regenerateChunk(c.getX(), c.getZ());
-						System.out.println("Regenerating " + (16 * c.getX()) + ", " + (16 * c.getZ()) + ": " + UnclaimedRegistry.getChunkProtectedReason(c));
+						//System.out.println("Regenerating " + (16 * c.getX()) + ", " + (16 * c.getZ()) + ": " + UnclaimedRegistry.getChunkProtectedReason(c));
 					}
 				}, offset);
 				

@@ -29,7 +29,7 @@ public class UnclaimedRegistry {
     
     public static boolean isProtected(Chunk chunk) {
         for (ProtectionProvider pp : protections) {
-            System.out.println("[Debug] Checking plugin " + pp.getName() + " for protected status: " + pp.isProtected(chunk));
+            //System.out.println("[Debug] Checking plugin " + pp.getName() + " for protected status: " + pp.isProtected(chunk));
             if (pp.isProtected(chunk)) return true;
         }
         
