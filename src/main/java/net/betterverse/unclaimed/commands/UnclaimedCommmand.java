@@ -72,6 +72,7 @@ public class UnclaimedCommmand implements CommandExecutor {
                     } else {
                         sender.sendMessage("You are not permitted.");
                     }
+                    return true;
                 }
                 return false;
             }
