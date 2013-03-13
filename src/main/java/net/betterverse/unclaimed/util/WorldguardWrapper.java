@@ -24,29 +24,29 @@ public class WorldguardWrapper implements ProtectionProvider {
         if (plugin == null) {
             return null;
         }
-       /* ApplicableRegionSet regions;
-        for (int x = 0; x < 16; x++) {
-            for (int z = 0; z < 16; z++) {
-                for (int y = 64; y < 192; y--) { // Start in the middle height - most protections are likely to be here
-                    regions = plugin.getRegionManager(chunk.getWorld()).getApplicableRegions(chunk.getBlock(x, y, z).getLocation());
-                    if (regions.size() > 0) {
-                        return regions.iterator().next().getId();
-                    }
-                }
-                for (int y = 193; y < 256; y--) {
-                    regions = plugin.getRegionManager(chunk.getWorld()).getApplicableRegions(chunk.getBlock(x, y, z).getLocation());
-                    if (regions.size() > 0) {
-                        return regions.iterator().next().getId();
-                    }
-                }
-                for (int y = 0; y < 63; y--) {
-                    regions = plugin.getRegionManager(chunk.getWorld()).getApplicableRegions(chunk.getBlock(x, y, z).getLocation());
-                    if (regions.size() > 0) {
-                        return regions.iterator().next().getId();
-                    }
-                }
-            }
-        }*/
+        /* ApplicableRegionSet regions;
+         for (int x = 0; x < 16; x++) {
+             for (int z = 0; z < 16; z++) {
+                 for (int y = 64; y < 192; y--) { // Start in the middle height - most protections are likely to be here
+                     regions = plugin.getRegionManager(chunk.getWorld()).getApplicableRegions(chunk.getBlock(x, y, z).getLocation());
+                     if (regions.size() > 0) {
+                         return regions.iterator().next().getId();
+                     }
+                 }
+                 for (int y = 193; y < 256; y--) {
+                     regions = plugin.getRegionManager(chunk.getWorld()).getApplicableRegions(chunk.getBlock(x, y, z).getLocation());
+                     if (regions.size() > 0) {
+                         return regions.iterator().next().getId();
+                     }
+                 }
+                 for (int y = 0; y < 63; y--) {
+                     regions = plugin.getRegionManager(chunk.getWorld()).getApplicableRegions(chunk.getBlock(x, y, z).getLocation());
+                     if (regions.size() > 0) {
+                         return regions.iterator().next().getId();
+                     }
+                 }
+             }
+         }*/
         return "Claimed by WorldGuard.";
     }
 
@@ -78,7 +78,7 @@ public class WorldguardWrapper implements ProtectionProvider {
         if (plugin == null) {
             return false;
         }
-        
+
         return plugin.getRegionManager(chunk.getWorld()).getApplicableRegions(chunk.getBlock(0, 0, 0).getLocation()).size() > 0;
         //Vector v = toVector();
         //return plugin.canBuild(null, null)
@@ -117,7 +117,7 @@ public class WorldguardWrapper implements ProtectionProvider {
 
     @Override
     public boolean isProtectedFrom(Player player, Location location) {
-            return plugin.getRegionManager(location.getWorld()).getApplicableRegions(location).isMemberOfAll(plugin.wrapPlayer(player));
+        return plugin.getRegionManager(location.getWorld()).getApplicableRegions(location).isMemberOfAll(plugin.wrapPlayer(player));
     }
 
 }
