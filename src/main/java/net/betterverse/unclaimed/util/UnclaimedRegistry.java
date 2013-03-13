@@ -26,33 +26,37 @@ public class UnclaimedRegistry {
     public static void clearProtections() {
         protections.clear();
     }
-    
+
     public static boolean isProtected(Chunk chunk) {
         for (ProtectionProvider pp : protections) {
             //System.out.println("[Debug] Checking plugin " + pp.getName() + " for protected status: " + pp.isProtected(chunk));
-            if (pp.isProtected(chunk)) return true;
+            if (pp.isProtected(chunk))
+                return true;
         }
-        
+
         return false;
     }
-    
+
     public static boolean isProtected(Location loc) {
         for (ProtectionProvider pp : protections) {
-        	//System.out.println("[Debug] Checking plugin " + pp.getName() + " for protected status: " + pp.isProtected(loc));
-            if (pp.isProtected(loc)) return true;
+            //System.out.println("[Debug] Checking plugin " + pp.getName() + " for protected status: " + pp.isProtected(loc));
+            if (pp.isProtected(loc))
+                return true;
         }
-        
+
         return false;
     }
-    
+
     public static boolean isProtectedFrom(Player player, Location loc) {
         for (ProtectionProvider pp : protections) {
-        	//System.out.println("[Debug] Checking plugin " + pp.getName() + " for protected status: " + pp.isProtectedFrom(player, loc));
-            if (pp.isProtectedFrom(player, loc)) return true;
+            //System.out.println("[Debug] Checking plugin " + pp.getName() + " for protected status: " + pp.isProtectedFrom(player, loc));
+            if (pp.isProtectedFrom(player, loc))
+                return true;
         }
-        
+
         return false;
     }
+<<<<<<< HEAD
     
     public static boolean isProtectedFromNoWG(Player p, Location l) {
         for (ProtectionProvider pp : protections) {
@@ -71,35 +75,42 @@ public class UnclaimedRegistry {
         return "";
     }
     
+=======
+
+>>>>>>> dev
     public static String getProtectedBy(Location loc) {
         for (ProtectionProvider pp : protections) {
-            if (pp.isProtected(loc)) return pp.getName();
+            if (pp.isProtected(loc))
+                return pp.getName();
         }
-        
+
         return "";
     }
-    
+
     public static String getChunkProtectedBy(Chunk c) {
         for (ProtectionProvider pp : protections) {
-            if (pp.isProtected(c)) return pp.getName();
+            if (pp.isProtected(c))
+                return pp.getName();
         }
-        
+
         return "";
     }
-    
+
     public static String getProtectedReason(Location loc) {
         for (ProtectionProvider pp : protections) {
-            if (pp.isProtected(loc)) return pp.getMessage(loc);
+            if (pp.isProtected(loc))
+                return pp.getMessage(loc);
         }
-        
+
         return "";
     }
-    
+
     public static String getChunkProtectedReason(Chunk c) {
         for (ProtectionProvider pp : protections) {
-            if (pp.isProtected(c)) return pp.getMessage(c);
+            if (pp.isProtected(c))
+                return pp.getMessage(c);
         }
-        
+
         return "";
     }
 
