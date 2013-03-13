@@ -11,7 +11,6 @@ import org.bukkit.event.hanging.HangingPlaceEvent;
 import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.bukkit.event.player.PlayerBucketFillEvent;
 
-
 public class Listener implements org.bukkit.event.Listener {
 
     private Unclaimed instance;
@@ -43,7 +42,7 @@ public class Listener implements org.bukkit.event.Listener {
     @EventHandler(ignoreCancelled = true)
     public void onHangingBreakByEntity(HangingBreakByEntityEvent e) {
         if (e.getRemover() instanceof Player) {
-            e.setCancelled(checkProtection((Player)e.getRemover(), e.getEntity().getLocation()));
+            e.setCancelled(checkProtection((Player) e.getRemover(), e.getEntity().getLocation()));
         }
     }
 
@@ -54,11 +53,11 @@ public class Listener implements org.bukkit.event.Listener {
 
     public boolean checkProtection(Player player, Location location) {
         if (!player.hasPermission("unclaimed.build")) {
-            player.sendMessage(instance.getDescription().getPrefix() +" "+ instance.getConfiguration().getBuildMessage());
+            player.sendMessage(instance.getDescription().getPrefix() + " " + instance.getConfiguration().getBuildMessage());
             return true;
         }
         return false;
-        
+
         //return UnclaimedRegistry.isProtectedFrom(player, location);
     }
 }

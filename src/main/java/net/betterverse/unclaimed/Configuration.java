@@ -14,7 +14,7 @@ public class Configuration {
     private List<String> activeRegenerationWorlds;
     private int regenerationOffset;
     private Unclaimed instance;
-    
+
     private YamlConfiguration config;
 
     public Configuration(Unclaimed instance) {
@@ -26,7 +26,7 @@ public class Configuration {
             e.printStackTrace();
         }
     }
-    
+
     protected final void reload() {
         config = (YamlConfiguration) instance.getConfig();
         buildMessage = config.getString("build-message");
@@ -53,11 +53,11 @@ public class Configuration {
     public int getTeleportCooldown() {
         return teleportCooldown;
     }
-    
+
     public List<String> getActiveRegenerationWorlds() {
         return activeRegenerationWorlds;
     }
-    
+
     public int getRegenerationOffset() {
         return regenerationOffset;
     }

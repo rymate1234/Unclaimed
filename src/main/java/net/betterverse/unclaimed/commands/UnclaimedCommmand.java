@@ -17,10 +17,10 @@ import net.betterverse.unclaimed.util.UnclaimedRegistry;
 public class UnclaimedCommmand implements CommandExecutor {
 
     private Unclaimed instance;
-    
+
     //cache of recently found chunks. if a teleport request finds a chunk before it reaches its search limit,
     //it will continue until it hits the search limit or until the cache reaches a size of 20.
-    
+
     //if a chunk is pulled from the cache on request, the search will not commence.
     //CURRENTLY NOT IMPLEMENTED. NOTE TO FUTURE DEVS:
     //IF THIS MESSAGE REMAINS AFTER 20/02/2013, FEEL FREE TO DELETE THE FOLLOWING LINE.
@@ -36,7 +36,7 @@ public class UnclaimedCommmand implements CommandExecutor {
             if (args.length == 0) {
                 //Boolean protection = getProtection(((Player) sender).getLocation());
                 StringBuilder message = new StringBuilder("Your location is ");
-                Player p = (Player)sender;
+                Player p = (Player) sender;
                 if (!UnclaimedRegistry.isProtected(p.getLocation())) {
                     message.append("not protected.");
                 } else {
@@ -63,7 +63,7 @@ public class UnclaimedCommmand implements CommandExecutor {
                     return true;
                 } else if (args[0].equalsIgnoreCase("regen")) {
                     if (sender.hasPermission("unclaimed.admin.regen")) {
-                        Player p = (Player)sender;
+                        Player p = (Player) sender;
                         if (UnclaimedRegistry.isProtected(p.getLocation())) {
                             sender.sendMessage("Cannot regen chunk, it is protected!");
                         } else {
@@ -93,7 +93,7 @@ public class UnclaimedCommmand implements CommandExecutor {
             player.sendMessage("This command is not available for the world " + player.getWorld().getName());
             return;
         }
-        
+
         Random random = new Random();
         int x;
         int z;
@@ -108,7 +108,7 @@ public class UnclaimedCommmand implements CommandExecutor {
         if (i == 100) {
             player.sendMessage("Gave up looking for unclaimed chunk after 100 tries.");
         } else {
-            Location chunkCenter = chunk.getBlock(7,127,7).getLocation();
+            Location chunkCenter = chunk.getBlock(7, 127, 7).getLocation();
             Location teleportLocation = chunk.getWorld().getHighestBlockAt(chunkCenter).getLocation().add(0, 1, 0);
             if (UnclaimedCommandTeleportTask.isCooling(player)) {
                 player.sendMessage("You've teleported too recently!");

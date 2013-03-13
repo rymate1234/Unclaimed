@@ -7,9 +7,8 @@ import net.betterverse.unclaimed.util.WorldguardWrapper;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
-
 public class Unclaimed extends JavaPlugin {
-    
+
     private Configuration configuration;
 
     @Override
@@ -25,7 +24,7 @@ public class Unclaimed extends JavaPlugin {
         }
         Bukkit.getPluginManager().registerEvents(new Listener(this), this);
         new RegenerationRunnable(this, getConfiguration().getActiveRegenerationWorlds()).runTaskTimer(this, getConfiguration().getRegenerationOffset() * 60 * 20, getConfiguration().getRegenerationOffset() * 3600 * 20);
-        
+
         //new RegenerationRunnable(this, getConfiguration().getActiveRegenerationWorlds()).runTaskTimer(this, getConfiguration().getRegenerationOffset() * 20, getConfiguration().getRegenerationOffset() * 20);
     }
 
