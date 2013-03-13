@@ -87,6 +87,10 @@ public class WorldguardWrapper implements ProtectionProvider {
         if (plugin == null) {
             return false;
         }
+
+        // Code inspired and modified from Factions
+        // https://github.com/MassiveCraft/Factions/blob/master/src/com/massivecraft/factions/integration/Worldguard.java
+
         World world = chunk.getWorld();
         int minChunkX = chunk.getX() << 4;
         int minChunkZ = chunk.getZ() << 4;
@@ -111,27 +115,6 @@ public class WorldguardWrapper implements ProtectionProvider {
         }
 
         return false;
-        //return plugin.getRegionManager(chunk.getWorld()).getApplicableRegions(chunk.getBlock(0, 0, 0).getLocation()).size() > 0;
-
-        //Vector v = toVector();
-        //return plugin.canBuild(null, null)
-        /*for (int x = 0; x < 16; x++) {
-            for (int z = 0; z < 16; z++) {
-                for (int y = 64; y < 192; y--) { // Start in the middle height - most protections are likely to be here
-                    if (plugin.getRegionManager(chunk.getWorld()).getApplicableRegions(chunk.getBlock(x, y, z).getLocation()).size() > 0)
-                        return true;
-                }
-                for (int y = 193; y < 256; y--) {
-                    if (plugin.getRegionManager(chunk.getWorld()).getApplicableRegions(chunk.getBlock(x, y, z).getLocation()).size() > 0)
-                        return true;
-                }
-                for (int y = 0; y < 63; y--) {
-                    if (plugin.getRegionManager(chunk.getWorld()).getApplicableRegions(chunk.getBlock(x, y, z).getLocation()).size() > 0)
-                        return true;
-                }
-            }
-        }
-        return false;*/
     }
 
     /**
