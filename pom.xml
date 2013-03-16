@@ -32,6 +32,17 @@
         </repository>
     </repositories>
 
+	<distributionManagement>
+		<repository>
+			<id>betterverse-deployment</id>
+			<url>http://dev.betterver.se/nexus/content/repositories/releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>betterverse-deployment</id>
+			<url>http://dev.betterver.se/nexus/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+
     <dependencies>
         <dependency>
             <groupId>org.bukkit</groupId>
