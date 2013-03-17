@@ -5,3 +5,6 @@ teleport-cooldown: 60
 regeneration-worlds:
   - "world"
 regeneration-interval: 12
+teleportation:
+  maxY: 256
+  minY: 9

@@ -7,12 +7,9 @@ import java.util.Set;
 
 public class UnclaimedCommandTeleportTask implements Runnable {
 
-    private static Set<Player> cooling;
+    private static Set<Player> cooling = new HashSet<Player>();
     private Player player;
 
-    static {
-        cooling = new HashSet<Player>();
-    }
 
     public UnclaimedCommandTeleportTask(Player player) {
         cooling.add(player);

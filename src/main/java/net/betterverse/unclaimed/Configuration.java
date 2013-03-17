@@ -10,6 +10,8 @@ public class Configuration {
     private String buildMessage;
     private int maxX;
     private int maxZ;
+    private int maxTeleportY;
+    private int minTeleportY;
     private int teleportCooldown;
     private List<String> activeRegenerationWorlds;
     private int regenerationOffset;
@@ -35,6 +37,8 @@ public class Configuration {
         teleportCooldown = config.getInt("teleport-cooldown");
         activeRegenerationWorlds = config.getStringList("regeneration-worlds");
         regenerationOffset = config.getInt("regeneration-interval");
+        minTeleportY = config.getInt("teleportation.minY");
+        maxTeleportY = config.getInt("teleportation.maxY");
         config.options().copyDefaults(true);
     }
 
@@ -60,5 +64,13 @@ public class Configuration {
 
     public int getRegenerationOffset() {
         return regenerationOffset;
+    }
+    
+    public int getMaxTeleportationY() {
+        return this.maxTeleportY;
+    }
+    
+    public int getMinTeleportationY() {
+        return minTeleportY;
     }
 }
