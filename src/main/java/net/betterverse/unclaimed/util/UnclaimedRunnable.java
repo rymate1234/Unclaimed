@@ -36,7 +36,7 @@ public class UnclaimedRunnable extends BukkitRunnable {
             z = random.nextInt(unclaimed.getConfiguration().getMaxZ() * 2) - unclaimed.getConfiguration().getMaxZ();
             chunk = unclaimed.getServer().getWorld("world").getChunkAt(x, z);
         } while ((UnclaimedRegistry.isProtected(chunk) || (tpLoc = getLocationFor(chunk)) == null) && i < 8); //we don't need to do it as many times
-        //TODO: add to hashmap
+        unclaimed.addChunk(chunk);
     }
     
     private Location getLocationFor(Chunk c) {
