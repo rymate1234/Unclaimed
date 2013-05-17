@@ -103,48 +103,4 @@ public class UnclaimedCommmand implements CommandExecutor {
             player.sendMessage("You've been teleported to an unclaimed area.");
         }
     }
-
-    private Location getLocationFor(Chunk c) {
-        // First we want to try and provide a random result.
-        Location location = getRandomLocationFor(c, instance.getConfiguration().getMinTeleportationY(), instance.getConfiguration().getMaxTeleportationY());
-        if (location != null) {
-            return location;
-        }
-        // Since our random attempts have failed, now we systematically go through the chunk looking for a valid place to set the player.
-        for (int x = 0; x < 16; x++) {
-            for (int z = 0; z < 16; z++) {
-                location = getLocationFor(c, x, z, instance.getConfiguration().getMinTeleportationY(), instance.getConfiguration().getMaxTeleportationY());
-                if (location != null) {
-                    return location;
-                }
-            }
-        }
-        return null;
-    }
-
-    private Location getRandomLocationFor(Chunk c, int minY, int maxY) {
-        Random rand = new Random();
-        // Make five attempts to place them randomly.  If all five of these fail, then we return null.
-        // Perhaps in the future this should/could/needs to be added to the config.
-        for (int attempts = 0; attempts < 5; attempts++) {
-            int x = rand.nextInt(16);
-            int z = rand.nextInt(16);
-            Location loc = getLocationFor(c, x, z, minY, maxY);
-            if (loc != null) {
-                return loc;
-            }
-        }
-        return null;
-    }
-
-    private Location getLocationFor(Chunk c, int x, int z, int minY, int maxY) {
-        // y is decremented by three because we need two blocks worth of space for the player to stand on.  
-        for (int y = maxY; y >= minY; y -= 3) {
-            Block b = c.getBlock(x, y, z);
-            if (b.getType().isSolid()) {
-                return b.getLocation().add(0, 2, 0);
-            }
-        }
-        return null;
-    }
 }
